@@ -1,14 +1,10 @@
 plugins {
     id 'application'
-    id 'org.beryx.jlink' version '4.0.0'
+    id 'org.beryx.jlink' version '4.0.1-rc'
 }
 
 repositories {
     mavenCentral()
-}
-
-dependencies {
-    
 }
 
 java {
@@ -18,21 +14,26 @@ java {
 }
 
 application {
-    mainClass = 'org.example.App'    
-    applicationDefaultJvmArgs += [
-        "--sun-misc-unsafe-memory-access=deny"
+    mainClass = 'org.example.App'
+    applicationDefaultJvmArgs = [
+            '-Dapplication.default.jvm.args'
     ]
 }
 
 jlink {
-    launcher{
+    launcher {
         name = 'example'
         jvmArgs = [
-            "--sun-misc-unsafe-memory-access=deny"
+                '-Djlink.launcher.jvm.args'
         ]
     }
 }
 
 jpackage {
-    imageOptions = ['--win-console'] 
+    if (org.gradle.internal.os.OperatingSystem.current().linux) {
+        installerType = 'deb'
+    }
+    if (org.gradle.internal.os.OperatingSystem.current().windows) {
+        installerType = 'msi'
+    }
 }

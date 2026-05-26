@@ -1,1 +1,1 @@
-Minimal reproducible example for https://github.com/beryx/badass-jlink-plugin/issues/349
+Minimal reproducible example for https://github.com/beryx/badass-jlink-plugin/issues/351
